@@ -1,0 +1,21 @@
+name: fetch-ssd
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/fetch-ssd.mjs
+      - run: |
+          git config user.name "ssd-bot"
+          git config user.email "ssd-bot@users.noreply.github.com"
+          git add data/ssd.json
+          git diff --staged --quiet || (git commit -m "auto ssd $(date -u +%FT%TZ)" && git push)

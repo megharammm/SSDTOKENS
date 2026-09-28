@@ -1,0 +1,24 @@
+:root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--green:#15803d;--amber:#b45309;--red:#b91c1c;--blue:#1d4ed8}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--ink)}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.header{background:#0f172a;color:#fff}.header h1{margin:8px 0;font-size:28px}.header h1 span{font-weight:400;font-size:18px;color:#fcd34d}.sub{color:#cbd5e1;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0}
+.badge{display:inline-block;padding:8px 12px;border-radius:999px;font-weight:700;background:#e2e8f0;margin:8px 0}
+.badge.green{background:#dcfce7;color:var(--green)}.badge.amber{background:#fef3c7;color:var(--amber)}.badge.red{background:#fee2e2;color:var(--red)}.badge.blue{background:#dbeafe;color:var(--blue)}
+.muted,.updated,.disclaimer{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.counter{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.counter h3{margin:0 0 4px;font-size:16px}.counter p{margin:4px 0;font-size:14px;color:var(--muted)}
+.counter a{display:inline-block;margin-top:8px;font-size:14px;color:var(--blue);text-decoration:none;font-weight:600}
+.list li{margin:6px 0}.footer{color:var(--muted);font-size:13px;padding-bottom:24px}
+details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;font-weight:600}
+a{color:var(--blue)}
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.btn{background:#f59e0b;border:0;color:#111827;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer}
+.btn.ghost{background:#e2e8f0}
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:flex-end;justify-content:center;padding:12px;z-index:50}
+.modal.hidden{display:none}
+.modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:16px}
+.modal-box label{display:block;font-size:13px;font-weight:600;margin:8px 0}
+.modal-box input,.modal-box select,.modal-box textarea{width:100%;margin-top:4px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+.row{display:flex;gap:8px;margin:10px 0}
