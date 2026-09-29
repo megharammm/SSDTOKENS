@@ -3,14 +3,14 @@
   "status": "closed",
   "countersOpenAt": "05:00",
   "slotDate": "29-Sep-2026",
-  "runningSlot": "12",
+  "runningSlot": "19",
   "balance": "0",
   "quotaNote": "Same-day only, ~10-15k/day till quota over",
   "sources": [
     "https://www.tirumala.org/",
     "https://www.tirumala.org/Current_Booking.aspx"
   ],
-  "verifiedAt": "2026-09-29T02:44:28.031Z",
+  "verifiedAt": "2026-09-29T09:04:15.069Z",
   "verifiedBy": "auto-TTD",
   "note": "Note: Live tickets status may vary by the time pilgrim reaches physically at the counters. Pligrims are waiting in the Q-line to take the SSD tokens. Tickets will be issued on first-come-first-service basis"
 }
