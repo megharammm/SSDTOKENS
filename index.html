@@ -9,12 +9,11 @@
 </head>
 <body>
   <header class="header">
-    <div class="wrap header-row">
+    <div class="wrap">
       <div>
         <h1>SSD Tokens <span>Tirupati (Offline)</span></h1>
-        <p class="sub">Free info page &bull; English &bull; No login &bull; Manually verified</p>
+        <p class="sub">Free info page &bull; English &bull; No login &bull; Auto-updated from TTD</p>
       </div>
-      <button id="openUpdate" class="btn">+ Update timing</button>
     </div>
   </header>
 
@@ -23,8 +22,8 @@
       <h2>Today: <span id="todayDate">--</span></h2>
       <div class="badge" id="todayBadge">Checking time...</div>
       <p id="todayMsg" class="muted"></p>
-      <p class="disclaimer">TTD publishes no live API. This is a time-based estimate (counters usually 5:00 AM till quota over, ~10-15k/day). Always confirm at counter.</p>
-      <p class="updated">Page auto-updates by IST &bull; No server &bull; Free hosting</p>
+      <p class="disclaimer">Auto-fetched from tirumala.org TIRUMALA UPDATES widget every 15 min via GitHub Actions. Always confirm at counter.</p>
+      <p class="updated">Auto-updates &bull; No server &bull; Free hosting</p>
     </section>
 
     <section>
@@ -56,7 +55,7 @@
 
     <section class="card">
       <h2>FAQ</h2>
-      <details><summary>Is this live tokens-left count?</summary><p>No. No live source exists. This page only shows likely status by time.</p></details>
+      <details><summary>Is this live tokens-left count?</summary><p>Near-live. Auto-fetched from tirumala.org every 15 min. Delay possible, verify at counter.</p></details>
       <details><summary>Where to get tokens?</summary><p>Vishnu Nivasam, Srinivasam Complex, Bhudevi Complex / Govindaraja Satralu in Tirupati. No footpath issue.</p></details>
       <details><summary>Cost?</summary><p>Free. After darshan one laddu free on token submission.</p></details>
     </section>
@@ -67,36 +66,6 @@
       <p>Unofficial info page. Source: TTD / trip information. Verify at counter. 100% free static site.</p>
     </div>
   </footer>
-
-  <div id="modal" class="modal hidden">
-    <div class="modal-box">
-      <h3>Update timing (manual)</h3>
-      <p class="muted">Copy from tirumala.org TIRUMALA UPDATES widget. Saves in this browser instantly + gives JSON to paste into data/ssd.json for public.</p>
-      <label>Date <input id="f_date" type="date"></label>
-      <label>Status
-        <select id="f_status">
-          <option value="not-started">not-started</option>
-          <option value="issuing">issuing</option>
-          <option value="full">full</option>
-          <option value="closed">closed</option>
-        </select>
-      </label>
-      <label>Counters opened at (IST) <input id="f_open" type="time" value="05:00"></label>
-      <label>Running slot <input id="f_slot" placeholder="12"></label>
-      <label>Slot date <input id="f_slotdate" placeholder="29-Sep-2026"></label>
-      <label>Balance <input id="f_balance" placeholder="0"></label>
-      <label>Note <input id="f_note" placeholder="Verified from TTD homepage"></label>
-      <label>Verified by <input id="f_by" placeholder="admin" value="admin"></label>
-      <div class="row">
-        <button id="saveUpdate" class="btn">Save</button>
-        <button id="resetUpdate" class="btn ghost">Reset</button>
-        <button id="closeUpdate" class="btn ghost">Close</button>
-      </div>
-      <label>Copy this into data/ssd.json to publish:
-        <textarea id="exportJson" rows="8" readonly></textarea>
-      </label>
-    </div>
-  </div>
 
   <script src="app.js"></script>
 </body>

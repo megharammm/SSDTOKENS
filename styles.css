@@ -13,12 +13,3 @@
 .list li{margin:6px 0}.footer{color:var(--muted);font-size:13px;padding-bottom:24px}
 details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;font-weight:600}
 a{color:var(--blue)}
-.header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.btn{background:#f59e0b;border:0;color:#111827;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer}
-.btn.ghost{background:#e2e8f0}
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:flex-end;justify-content:center;padding:12px;z-index:50}
-.modal.hidden{display:none}
-.modal-box{background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:16px}
-.modal-box label{display:block;font-size:13px;font-weight:600;margin:8px 0}
-.modal-box input,.modal-box select,.modal-box textarea{width:100%;margin-top:4px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:14px}
-.row{display:flex;gap:8px;margin:10px 0}

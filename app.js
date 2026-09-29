@@ -23,10 +23,6 @@ function todayStatus(d) {
 
 async function loadOfficial() {
   try {
-    const local = localStorage.getItem("ssd_manual_override");
-    if (local) return JSON.parse(local);
-  } catch {}
-  try {
     const r = await fetch("data/ssd.json", { cache: "no-store" });
     if (!r.ok) return null;
     return await r.json();
@@ -42,10 +38,10 @@ async function render() {
     const statusMap = { issuing: "green", full: "amber", closed: "red", "not-started": "blue" };
     b.textContent = `${off.date}: ${off.status.toUpperCase()} - Slot ${off.runningSlot} on ${off.slotDate} - Balance ${off.balance}`;
     b.className = "badge " + (statusMap[off.status] || "blue");
-    document.getElementById("todayMsg").textContent = `${off.note} Counters opened ${off.countersOpenAt} IST. Verified manually at ${off.verifiedAt} by ${off.verifiedBy}. Sources: ${off.sources.join(", ")}`;
+    document.getElementById("todayMsg").textContent = `${off.note} Counters opened ${off.countersOpenAt} IST. Auto-updated at ${off.verifiedAt} by ${off.verifiedBy}. Sources: ${off.sources.join(", ")}`;
   } else {
     const s = todayStatus(d);
-    b.textContent = s.label + " (manual update pending)";
+    b.textContent = s.label + " (auto update pending)";
     b.className = "badge " + s.cls;
     document.getElementById("todayMsg").textContent = s.msg;
   }
@@ -56,52 +52,3 @@ async function render() {
 }
 render();
 setInterval(render, 60000);
-
-const modal = document.getElementById("modal");
-document.getElementById("openUpdate").onclick = async () => {
-  modal.classList.remove("hidden");
-  const off = await loadOfficial() || {};
-  f_date.value = off.date || new Date().toISOString().slice(0, 10);
-  f_status.value = off.status || "issuing";
-  f_open.value = off.countersOpenAt || "05:00";
-  f_slot.value = off.runningSlot || "";
-  f_slotdate.value = off.slotDate || "";
-  f_balance.value = off.balance || "";
-  f_note.value = off.note || "";
-  f_by.value = off.verifiedBy || "admin";
-  updateExport();
-};
-function collect() {
-  const d = istNow();
-  return {
-    date: f_date.value,
-    status: f_status.value,
-    countersOpenAt: f_open.value,
-    slotDate: f_slotdate.value,
-    runningSlot: f_slot.value,
-    balance: f_balance.value,
-    quotaNote: "Same-day only, ~10-15k/day till quota over",
-    sources: ["https://www.tirumala.org/", "https://www.tirumala.org/Current_Booking.aspx"],
-    verifiedAt: d.toISOString(),
-    verifiedBy: f_by.value || "admin",
-    note: f_note.value || ""
-  };
-}
-function updateExport() {
-  document.getElementById("exportJson").value = JSON.stringify(collect(), null, 2);
-}
-["f_date","f_status","f_open","f_slot","f_slotdate","f_balance","f_note","f_by"].forEach(id => {
-  document.getElementById(id).oninput = updateExport;
-});
-document.getElementById("saveUpdate").onclick = async () => {
-  const obj = collect();
-  localStorage.setItem("ssd_manual_override", JSON.stringify(obj));
-  updateExport();
-  await render();
-  alert("Saved in this browser. Copy JSON below into data/ssd.json and push to publish for all.");
-};
-document.getElementById("resetUpdate").onclick = async () => {
-  localStorage.removeItem("ssd_manual_override");
-  await render();
-};
-document.getElementById("closeUpdate").onclick = () => modal.classList.add("hidden");
