@@ -14,8 +14,17 @@ jobs:
         with:
           node-version: 20
       - run: node scripts/fetch-ssd.mjs
-      - run: |
+      - id: commit
+        run: |
           git config user.name "ssd-bot"
           git config user.email "ssd-bot@users.noreply.github.com"
           git add data/ssd.json
-          git diff --staged --quiet || (git commit -m "auto ssd $(date -u +%FT%TZ)" && git push)
+          git diff --staged --quiet && echo "changed=false" >> $GITHUB_OUTPUT || (git commit -m "auto ssd $(date -u +%FT%TZ)" && git push && echo "changed=true" >> $GITHUB_OUTPUT)
+      - if: steps.commit.outputs.changed == 'true'
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TG_TOKEN" ] || [ -z "$TG_CHAT" ]; then echo "telegram secrets missing, skip"; exit 0; fi
+          MSG=$(node -e "const d=require('./data/ssd.json');console.log(\`SSD update: \${d.status.toUpperCase()} - Slot \${d.runningSlot} on \${d.slotDate} - Balance \${d.balance} (\${d.date}) - https://ssdtokensapp.vercel.app/\`)")
+          curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" -d chat_id="$TG_CHAT" -d text="$MSG" -d parse_mode="HTML"
